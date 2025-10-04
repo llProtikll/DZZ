@@ -4,25 +4,11 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("имя:");
-            string name = Console.ReadLine();
-            Console.WriteLine("годиков:");
-            int age = int.Parse(Console.ReadLine());
-            Console.WriteLine("рост:");
-            double height = double.Parse(Console.ReadLine());
-            Console.WriteLine("гендер (м/ж):");
-            string gender = Console.ReadLine();
-            Console.WriteLine("буква:");
-            char letter = char.Parse(Console.ReadLine());
-            Console.WriteLine("город:");
-            string city = Console.ReadLine();
+            int result1 = (3 + 5 * (6 + 3) - 8 * 3 + 1) / (21 + 50 / (3 + 4 * (1 + 2)));
+            double result2 = ((0.25 - 0.12) * 0.81 + 0.132 - 2.7 / 3.1) / (3 / 7 + 2.97 * (8.05 - 8.1 * 6.07));
 
-            Console.WriteLine($"имя: {name}");
-            Console.WriteLine($"годиков: {age}");
-            Console.WriteLine($"рост: {height}");
-            Console.WriteLine($"гендер (м/ж): {gender}");
-            Console.WriteLine($"буква: {letter}");
-            Console.WriteLine($"город: {city}");
+            Console.WriteLine(result1);
+            Console.WriteLine(result2);
         }
     }
 }
