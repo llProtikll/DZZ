@@ -1,106 +1,103 @@
-﻿using System.ComponentModel.Design;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
 
 namespace Dzz
 {
     internal class Program
     {
         static void Main(string[] args)
-        {
+        {   
 
             //1
 
-            Console.WriteLine("задание 1:");
-            int number;
-            while (true)
+            int[] numbers = new int[10];
+            for (int i = 0; i < numbers.Length; i++)
             {
-                Console.Write("введите целое четырехзначное число: ");
-                if (!int.TryParse(Console.ReadLine(), out number) || number < 1000 || number > 9999)
+                numbers[i] = Random.Shared.Next(7, 15);
+            }
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if (numbers[i] > 10)
                 {
-                    Console.WriteLine("ошибка | число не четырехзначное или не целое");
-                }
-                else
-                {
-                    break;
+                    numbers[i] = numbers[i] - 10;
                 }
             }
-            int count = 0;
-            for (int i = number; i > 0; i /= 10)
+            for (int i = 0; i < numbers.Length; i++)
             {
-                if ((i % 10) % 2 == 0)
-                {
-                    count++;
-                }
+                Console.Write($"{numbers[i]} ");
             }
-            Console.WriteLine($"количество четных цифр в числе {number} равно: {count}");
-
-
 
             //2
-            ulong sumarry = 0;
-            int a;
-            int b;
-            Console.WriteLine("введите число а (англискую): ");
-            while (true)
-                if (!int.TryParse((Console.ReadLine()), out a))
-                {
-                    Console.WriteLine("неккоректный ввод | введите целое число а");
-                }
-                else
-                {
-                    break;
-                }
-            Console.WriteLine("введите число б (англискую): ");
-            while (true)
+            int[] numbers1 = Array.ConvertAll(new int[20],
+                 _ => Random.Shared.Next(10, 31));
+
+            int[] numbers2 = Array.ConvertAll(new int[20],
+              _ => Random.Shared.Next(10, 31));
+
+            int[] numbers3 = new int[20];
+            Console.Write("\nсуммы соответствующих элементов 2 массивов: ");
+            for (int i = 0; i < numbers3.Length; i++)
             {
-                if (!int.TryParse((Console.ReadLine()), out b) || a > b)
+                numbers3[i] = numbers1[i] + numbers2[i];
+            }
+            for (int i = 0; i < numbers3.Length; i++)
+            {
+                Console.Write($"{numbers3[i]} ");
+            }
+            double average = 0;
+            for (int i = 0; i < numbers3.Length; i++)
+            {
+                average += (double)numbers3[i] / 2;
+            }
+
+            Console.WriteLine($"\nсреднее арифметическое элементов 3 массива: {average}");
+
+            int MinValue = numbers3[0];
+            int MaxValue = numbers3[0];
+            for (int i = 0; i < numbers3.Length; i++)
+            {
+                if (numbers3[i] < MinValue)
                 {
-                    Console.WriteLine("неккоректный ввод | введите целое число б. Также б должно быть больше а");
+                    MinValue = numbers3[i];
                 }
-                else
+                if (numbers3[i] > MaxValue)
                 {
-                    break;
+                    MaxValue = numbers3[i];
                 }
             }
-            for (int i = a; i <= b; i++)
+
+            Console.WriteLine($"минимальное значение 3 массива: {MinValue}");
+            Console.WriteLine($"максимальное значение 3 массива: {MaxValue}");
+
+            //3 
+            int[] numbers4 = Array.ConvertAll(new int[20],
+                _ => Random.Shared.Next(0, 51));
+            Console.Write("элементы неотсортированного 4 массива: ");
+            for (int i = 0; i < numbers4.Length; i++)
             {
-                if (i % 2 != 0)
-                {
-                    sumarry += (ulong)(i * i);
-                }
+                Console.Write($"{numbers4[i]} ");
             }
-            Console.WriteLine($"сумма квадратов целых нечетных чисел от а до б равна: {sumarry}");
 
-
-
-            //3
-            Console.WriteLine("введите пароль: ");
-            const int correctpassword = 12345;
-            int password;
-            int attempts = 5;
-            while (true)
+            for (int i = 0; i < numbers4.Length - 1; i++)
             {
-                if (int.TryParse(Console.ReadLine(), out password) && password == correctpassword)
+                bool swapped = false;
+                for (int j = 0; j < numbers4.Length - i - 1; j++) 
                 {
-                    Console.WriteLine("дарова");
-                    return;
-                }
-                else
-                {
-                    if (attempts > 1)
+                    if (numbers4[j] < numbers4[j + 1])
                     {
-                        attempts--;
-                        Console.WriteLine($"ошибка | пароль неверный {attempts}");
-                    }
-                    else
-                    {
-                        Console.WriteLine("лимит | больше нельзя");
-                        return;
+                        int temp = numbers4[j];
+                        numbers4[j] = numbers4[j + 1];
+                        numbers4[j + 1] = temp;
+                        swapped = true;
                     }
                 }
+                if (!swapped) break; 
             }
 
-
+            Console.Write("элементы отсортированного 4 массива: ");
+            for (int i = 0; i < numbers4.Length; i++)
+            {
+                Console.Write($"{numbers4[i]} ");
+            }
         }
     }
 }
